@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Summarizer - Settings</title>
+
+  <style>
+    /* --- RESET & BASE --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #f9fafb 0%, #f1f5f9 100%);
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    /* --- HEADER --- */
+    .header {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      padding: 60px 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+      transform: rotate(45deg);
+    }
+
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .icon-wrapper {
+      width: 90px;
+      height: 90px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .icon-wrapper svg {
+      width: 48px;
+      height: 48px;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* --- MAIN CONTENT --- */
+    .main-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .info-section,
+    .help-section {
+      flex: 1;
+
+      padding: 40px;
+    }
+
+
+    .info-box {
+      display: flex;
+      align-items: start;
+      gap: 16px;
+      background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 32px;
+      border-left: 5px solid #6366f1;
+    }
+
+    .info-box svg {
+      width: 28px;
+      height: 28px;
+      color: #4f46e5;
+      flex-shrink: 0;
+    }
+
+    .info-box-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #312e81;
+    }
+
+    .info-box-content p {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    /* --- SUCCESS MESSAGE --- */
+    .success-message {
+      display: none;
+      background: #ecfdf5;
+      border-left: 4px solid #10b981;
+      color: #065f46;
+      padding: 16px 20px;
+      border-radius: 14px;
+      font-weight: 600;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .success-message.show {
+      display: flex;
+    }
+
+    .success-message svg {
+      width: 22px;
+      height: 22px;
+      color: #10b981;
+    }
+
+    /* --- FORM --- */
+    .form-label {
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-helper {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 18px;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: #94a3b8;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 18px 18px 18px 54px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      font-size: 15px;
+      background: white;
+      transition: all 0.25s ease;
+      font-family: monospace;
+    }
+
+    input[type="text"]:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+      outline: none;
+    }
+
+    /* --- BUTTON --- */
+    .btn {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 30px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
+    }
+
+    .btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* --- HELP SECTION --- */
+    .help-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .help-section h2 svg {
+      color: #6366f1;
+      width: 28px;
+      height: 28px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .step {
+      display: flex;
+      align-items: start;
+      gap: 14px;
+    }
+
+    .step-number {
+      background: #eef2ff;
+      color: #4f46e5;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-content h4 {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .api-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 26px;
+      font-weight: 600;
+      color: #4f46e5;
+      background: #eef2ff;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: all 0.25s ease;
+    }
+
+    .api-link:hover {
+      background: #4f46e5;
+      color: white;
+      box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-content">
+      <div class="icon-wrapper">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+      </div>
+      <h1>AI Summarizer Settings</h1>
+      <p>Configure your extension to start summarizing content</p>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="info-section">
+      <div class="info-box">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div class="info-box-content">
+          <h3>API Key Required</h3>
+          <p>To use the AI Summarizer, you need a Gemini API key from Google. Don't worry — getting one is free and quick!</p>
+        </div>
+      </div>
+
+      <div class="success-message" id="successMessage">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+        API Key saved successfully! You're all set to start summarizing.
+      </div>
+
+      <label class="form-label" for="apiKeyInput">Your Gemini API Key</label>
+      <p class="form-helper">Paste your API key below. It will be securely stored in your browser.</p>
+      <div class="input-wrapper">
+        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+        </svg>
+        <input type="text" id="apiKeyInput" placeholder="AIzaSyDXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" />
+      </div>
+
+      <button class="btn" id="saveBtn">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+        </svg>
+        Save API Key
+      </button>
+    </div>
+
+    <div class="help-section">
+      <h2>
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        How to Get Your API Key
+      </h2>
+      <!-- <p>Follow these steps to get your free Gemini API key from Google AI Studio:</p> -->
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Visit Google AI Studio</h4>
+            <p>Click the button below to open the site.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Sign in with Google</h4>
+            <p>Use your Google account credentials.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Create API Key</h4>
+            <p>Click "Get API Key" and generate a key.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Paste It Above</h4>
+            <p>Copy the generated key and paste it into the field above.</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://aistudio.google.com/app/apikey" target="_blank" class="api-link">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
+        Get Your Gemini API Key
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>AI Summarizer • Powered by Google Gemini</p>
+  </div>
+<script src="options.js"></script>
+</body>
+</html>
