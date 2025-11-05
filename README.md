@@ -246,7 +246,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 If you encounter any issues or have questions:
-- Open an issue on [GitHub Issues](https://github.com/Atharva0745/ai-article-summarizer/issues)
+- Open an issue on [GitHub Issues](https://github.com/Atharva0745/ai-sumarrizer/issues)
 - Review existing issues for solutions
 
 ## ⭐ Show Your Support
