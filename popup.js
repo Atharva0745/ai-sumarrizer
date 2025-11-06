@@ -54,7 +54,7 @@ summarizeBtn.addEventListener('click', () => {
     });
 });
 
-copyBtn.addEventListener('click', async () => {
+copyBtn.addEventListener('click',  async()=> {
     try {
         // Get the formatted HTML content
         const htmlContent = summaryText.innerHTML;
